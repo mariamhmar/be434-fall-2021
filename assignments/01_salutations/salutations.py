@@ -22,7 +22,7 @@ def get_args():
                         help='name to greet',
                         metavar='str',
                         type=str,
-                        default='stranger')
+                        default='Stranger')
 
     parser.add_argument('-g',
                         '--greeting',
@@ -47,9 +47,8 @@ def main():
 
     args = get_args()
     ending= '!' if args.excited else '.' 
-    print(args.greeting + ', ' + args.name + '.')
+    print(args.greeting + ', ' + args.name + ending)
 
-ending= '!'
 # --------------------------------------------------
 if __name__ == '__main__':
     main()
