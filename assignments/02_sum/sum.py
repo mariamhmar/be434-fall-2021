@@ -32,13 +32,13 @@ def main():
 
     args = get_args()
     
-    print(args.numbers)
-    print(sum(args.numbers))
+    #print(args.numbers)
+    #print(sum(args.numbers))
     numbers = args.numbers
-    str(numbers)
+    
     strings = [str(n) for n in numbers]
-    ' + ' .join(strings)
-    print('{} = {}'.format( ' + ' .join(strings), sum(numbers))
+    
+    print('{} = {}'.format( ' + ' .join(strings), sum(numbers)))
     
 # --------------------------------------------------
 if __name__ == '__main__':
