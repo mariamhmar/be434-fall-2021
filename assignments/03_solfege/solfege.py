@@ -19,7 +19,7 @@ def get_args():
     parser.add_argument('str',
                         metavar='str',
                         help='solfege',
-                        nargs= '+')
+                        nargs='+')
 
     return parser.parse_args()
 
@@ -30,7 +30,7 @@ def main():
 
     args = get_args()
 
-    answers = dict()
+    answers = {}
     answers['Do'] = 'A deer, a female deer'
     answers['Re'] = 'A drop of golden sun'
     answers['Mi'] = 'A name I call myself'
@@ -38,8 +38,7 @@ def main():
     answers['Sol'] = 'A needle pulling thread'
     answers['La'] = 'A note to follow sol'
     answers['Ti'] = 'A drink with jam and bread'
-                                                    
-    for notes in args.str:                    
+    for notes in args.str:
 
         if notes not in answers:
             print(f'I don\'t know "{notes}"')
