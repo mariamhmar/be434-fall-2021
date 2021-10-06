@@ -22,6 +22,7 @@ def get_args():
                         help='name to greet',
                         metavar='str',
                         type=str,
+                        make
                         default='Stranger')
 
     parser.add_argument('-g',
