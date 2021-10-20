@@ -4,11 +4,12 @@ Author : mhmarand <mhmarand@localhost>
 Date   : 2021-10-15
 Purpose: Rock the Casbah
 """
-
 import argparse
 import sys
 
 # --------------------------------------------------
+
+
 def get_args():
     """Get command-line arguments"""
 
@@ -18,7 +19,7 @@ def get_args():
 
     parser.add_argument('seq',
                         metavar='SEQ',
-                        nargs= '+',
+                        nargs='+',
                         help='Input sequence(s)')
 
     parser.add_argument('-o',
@@ -38,20 +39,21 @@ def main():
     args = get_args()
     sequence_list = args.seq
 
-    iupac = {'A':'A', 'C':'C', 'G':'G', 'T':'T', 'U':'U', 
-            'R':'[AG]', 'Y':'[CT]', 'S':'[GC]', 'W':'[AT]', 'K':'[GT]',
-            'M':'[AC]', 'B':'[CGT]', 'D':'[AGT]', 'H':'[ACT]', 
-            'V':'[ACG]', 'N': '[ACGT]'}
+    iupac = {'A': 'A', 'C': 'C', 'G': 'G', 'T': 'T', 'U': 'U',
+             'R': '[AG]', 'Y': '[CT]', 'S': '[GC]', 'W': '[AT]', 'K': '[GT]',
+             'M': '[AC]', 'B': '[CGT]', 'D': '[AGT]', 'H': '[ACT]',
+             'V': '[ACG]', 'N': '[ACGT]'}
 
     for seq in sequence_list:
-        for item in seq:
-            print(iupac.get(item))
-    for seq in sequence_list:
-        for item += 1:
-        print(item, iupac.get(item))  
-      
+        new_seq = ''
+        for base in seq:
+            if base in iupac:
+                new_seq += iupac.get(base)
+        print(seq, new_seq, file=args.outfile)
+    if args.outfile != sys.stdout:
+        print(f'Done, see output in "{args.outfile.name}"')
+
 
 # --------------------------------------------------
 if __name__ == '__main__':
     main()
-
