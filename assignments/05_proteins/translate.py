@@ -22,9 +22,9 @@ def get_args():
 
     parser.add_argument('-o',
                         '--output',
-                        help='out txt',
+                        help='Output file',
                         metavar='FILE',
-                        type=str,
+                        type=argparse.FileType('wt'),
                         default='out.text')
 
     parser.add_argument('-c',
@@ -32,8 +32,7 @@ def get_args():
                         metavar='FILE',
                         type=argparse.FileType('rt'),
                         default=None,
-                        required=True
-                         )
+                        required=True)
 
     parser.add_argument('-o',
                         '--outfile',
@@ -47,16 +46,28 @@ def get_args():
 
 # --------------------------------------------------
 def main():
-    args = get_args()
-    for line in args.codons:
-        print(line.rstrip().split())
+    
     """Make a jazz noise here"""
 
     args = get_args()
-    print('seq =', args.sequence)
-    print('codons =', args.codons)
-    print('outfile =', args.outfile)
+    print(args)
 
+    codon_table={}
+    for line in args.codons:
+        key, val = line.split()
+        codon_table[key] = val
+    k= 3
+    seq = args.sequence
+    protein = []
+    for codon in [seq[i:i + k] for i in range(0, len(seq), k)]:
+        print(codon, codon_table.get(codon, '_'), end='')
+
+    print(protein, file=args.outfile)
+    print(f'Output written to "{args.outfile.name}".')
+
+    pprint(codon_table)
+
+    
 # --------------------------------------------------
 if __name__ == '__main__':
     main()
