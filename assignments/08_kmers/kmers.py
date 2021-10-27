@@ -2,10 +2,11 @@
 """
 Author : mhmarand <mhmarand@localhost>
 Date   : 2021-10-26
-Purpose: Rock the Casbah
+Purpose: Program that Prints Kmers
 """
 
 import argparse
+from collections import defaultdict
 
 
 # --------------------------------------------------
@@ -13,7 +14,7 @@ def get_args():
     """Get command-line arguments"""
 
     parser = argparse.ArgumentParser(
-        description='Rock the Casbah',
+        description='Kmers',
         formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     parser.add_argument('-k',
                         '--kmer',
@@ -35,8 +36,8 @@ def get_args():
     args = parser.parse_args()
 
     if args.kmer < 1:
-        parser.error(f'--kmer "{args.kmer}" must be greater than 0')
- 
+        parser.error(f'--kmer "{args.kmer}" must be > 0')
+
     return args
 
 
@@ -45,30 +46,30 @@ def main():
     """Make a jazz noise here"""
 
     args = get_args()
-    str_arg = args.arg
-    int_arg = args.int
-    file_arg = args.file
-    flag_arg = args.on
-    pos_arg = args.positional
+    kmers1 = count_kmers(args.file1, args.kmer)
+    kmers2 = count_kmers(args.file2, args.kmer)
 
-    words1 = {}
-    for line in args.file1:
+    for common in set(kmers1).intersection(set(kmers2)):
+        print('{:10} {:5} {:5}'.format(
+            common, kmers1.get(common), kmers2.get(common)))
+
+
+def count_kmers(fh, k):
+    '''count kmers in file handle'''
+
+    kmers = defaultdict(int)
+    for line in fh:
         for word in line.split():
-            words1[word] = 1
+            for kmer in find_kmers(word, k):
+                kmers[kmer] += 1
 
-    words2 = {}
-    for line in args.file2:
-        for word in line.split():
-            words2[word] = 1
+    return kmers
 
-    for key in words1:
-        if key in words2:
-            print(key)
 
-    def find_kmers(seq, k):
-        n = len(seq) - k + 1
+def find_kmers(seq, k):
+    """ kmers value"""
+    n = len(seq) - k + 1
     return [] if n < 1 else [seq[i:i + k] for i in range(n)]
-
 
 
 # --------------------------------------------------
