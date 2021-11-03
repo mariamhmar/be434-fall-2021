@@ -1,6 +1,6 @@
 # FASTA Interleaved Paired Read Splitter
 
-Some sequencing platforms such as Illumina may generate forward/reverse read pairs that sequence the target region from either end. 
+Some sequencing platforms such as Illumina may generate forward/reverse read pairs that sequence the target region from either end. fasta
 Sometimes these reads overlap and can be joined into a single read, but sometimes they have a gap and cannot be joined.
 The resulting read pairs are often placed into two files with an extension like `_1` or `_R1` for the forward reads and `_2` or `_R2` for the reverse, but sometimes the reads are interleaved in one file with the forward read immediately followed by the reverse read.
 
