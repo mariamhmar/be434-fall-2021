@@ -42,13 +42,8 @@ def main():
 
     if not os.path.isdir(out_dir):
         os.makedirs(out_dir)
-
-    for fh in args.files:
-        root, ext = os.path.splitext(os.path.basename(fh.name))
-        forward = open(os.path.join(out_dir, root + '_1' + ext), 'wt')
-        reverse = open(os.path.join(out_dir, root + '_2' + ext), 'wt')
-        parser =
     
+args = get_args()
 
 # --------------------------------------------------
 if __name__ == '__main__':
