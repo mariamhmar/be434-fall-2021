@@ -22,7 +22,7 @@ def get_args():
     args = parser.parse_args()
 
     if os.path.isfile(args.seq):
-        args.seq = open(args.seq).read.rstrip()
+        args.seq = open(args.seq).read().rstrip()
 
     return args
 
@@ -42,9 +42,9 @@ def rle(seq: str) -> str:
 
     counts = []
     count = 0
-    prev = None
+    prev = ''
     for char in seq:
-        if prev is None:
+        if prev == '':
             prev = char
             count = 1
         elif char == prev:
@@ -52,19 +52,18 @@ def rle(seq: str) -> str:
         else:
             counts.append((prev, count))
             count = 1
-            prev = char 
+            prev = char
 
     counts.append((prev, count))
-    
-    print(counts)
-    
+
+    #print(counts)
+
     ret = ''
     for char, count in counts:
-        print(char, counts)
-        ret += char + str(count) if count > 1 else ''
-    
-    return ret
+        #print(char, counts)
+        ret += char + (str(count) if count > 1 else '')
 
+    return ret
 
 
 #--------------------------------------------
