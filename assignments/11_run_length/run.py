@@ -52,13 +52,19 @@ def rle(seq: str) -> str:
         else:
             counts.append((prev, count))
             count = 1
-            prev = char
+            prev = char 
 
+    counts.append((prev, count))
+    
+    print(counts)
+    
     ret = ''
-    for char, num in counts:
-        ret += '{}{}'.format(char, '' if num == 1 else num)
-
+    for char, count in counts:
+        print(char, counts)
+        ret += char + str(count) if count > 1 else ''
+    
     return ret
+
 
 
 #--------------------------------------------

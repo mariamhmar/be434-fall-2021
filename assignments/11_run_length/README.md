@@ -42,7 +42,7 @@ A2
 
 The first test file has the following single sequence:
 
-```
+```  
 $ cat inputs/sample1.txt
 ACCGGGTTTT
 ```

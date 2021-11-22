@@ -44,7 +44,12 @@ def get_args() -> Args:
                         default=defaults.get('name', username),
                         help='Name for docstring')
 
-    
+    parser.add_argument('-e',
+                        '--email',
+                        type=str,
+                        default=defaults.get('email', f'{username}@{hostname}'),
+                        help='Email for docstring')
+
     parser.add_argument('-p',
                         '--purpose',
                         type=str,
@@ -70,7 +75,7 @@ def get_args() -> Args:
 def main() -> None:
     """Make a jazz noise here"""
 
-    args = get_args() 
+    args = get_args()
     program = args.program
 
     if os.path.isfile(program) and not args.overwrite:
@@ -97,12 +102,9 @@ def body(args: Args) -> str:
 Author : {args.name}{' <' + args.email + '>' if args.email else ''}
 Date   : {today}
 Purpose: {args.purpose}
- 
+\"\"\"
+
 import argparse
-$ cat ~/.new.py
-name=Mariam Marand
-email=mhmarand@email.arizona.edu
-purpose=Look out, you rock-and-rollers!
 
 
 # --------------------------------------------------

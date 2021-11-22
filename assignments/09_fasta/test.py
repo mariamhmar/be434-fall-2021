@@ -8,10 +8,6 @@ from subprocess import getstatusoutput
 from shutil import rmtree
 from typing import List, NamedTuple
 from Bio import SeqIO
-<<<<<<< HEAD
-
-=======
->>>>>>> 5ae0c29186478888ac5e1868ac034b8faa608836
 
 PRG = './au_pair.py'
 

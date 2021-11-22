@@ -20,7 +20,7 @@ def get_args():
                         help='find conserved bases',
                         metavar='FILE',
                         type=argparse.FileType('rt'))
-    
+
     return parser.parse_args()
 
 
@@ -41,20 +41,13 @@ def main():
             bases += seq[i]
 
         print(bases)
-        if all ([bases[0] == base for base in bases]):
+        if all([bases[0] == base for base in bases]):
             print('|', end='')
-        else: 
+        else:
             print('x', end='')
 
-    print()    
+    print()
 
-
-    
-
-    
- 
-
-    
 
 # --------------------------------------------------
 if __name__ == '__main__':
