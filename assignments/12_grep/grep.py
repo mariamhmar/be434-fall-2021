@@ -9,6 +9,7 @@ import argparse
 import re
 import sys
 
+
 # --------------------------------------------------
 def get_args():
     """Get command-line arguments"""
@@ -17,9 +18,7 @@ def get_args():
         description='Rock the Casbah',
         formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 
-    parser.add_argument('PATTERN',
-                        metavar='Pattern',
-                        help='Search pattern')
+    parser.add_argument('pattern', metavar='PATTERN', help='Search pattern')
 
     parser.add_argument('FILE',
                         help='Input file(s)',
@@ -38,7 +37,7 @@ def get_args():
                         metavar='FILE',
                         type=argparse.FileType('wt'),
                         default=sys.stdout)
-   
+
     return parser.parse_args()
 
 
@@ -47,21 +46,28 @@ def main():
     """Make a jazz noise here"""
 
     args = get_args()
-    print(args)
+    num_FILE = len(args.FILE)
 
     for fh in args.FILE:
-        num_lines = 0
-        num_words = 0
-        num_chars = 0
-    for line in fh:
-            num_lines += 1
-            num_words += len(line.split())
-    
-    for line in args.pattern:
-        match = re.match(pattern, line)
-        print(match, fh)
- 
-  
+        for line in fh:
+            if re.search(args.pattern, line,
+                         re.IGNORECASE if args.insensitive else 0):
+                # print(line, end='',file=args.outfile)
+
+                print('{}{}'.format(
+                    f'{fh.name}:' if num_FILE > 1 else '', line),
+                    end='', file=args.outfile)
+            # if re.search(args.pattern, line):
+            # print(line, end='', file=args.outfile)
+
+# for line in fh:
+#   num_lines += 1
+#  num_words += len(line.split())
+
+# for line in args.pattern:
+#  match = re.match(pattern, line)
+# print(match, fh)
+
 
 # --------------------------------------------------
 if __name__ == '__main__':
