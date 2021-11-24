@@ -24,6 +24,7 @@ def get_args():
     parser.add_argument('FILE',
                         help='Input file(s)',
                         metavar='FILE',
+                        type=argparse.FileType('rt'),
                         nargs='+')
 
     parser.add_argument('-i',
@@ -35,7 +36,7 @@ def get_args():
                         '--outfile',
                         help='FILE',
                         metavar='FILE',
-                        type=argparse.FileType('rt'),
+                        type=argparse.FileType('wt'),
                         default=sys.stdout)
    
     return parser.parse_args()
@@ -47,6 +48,20 @@ def main():
 
     args = get_args()
     print(args)
+
+    for fh in args.FILE:
+        num_lines = 0
+        num_words = 0
+        num_chars = 0
+    for line in fh:
+            num_lines += 1
+            num_words += len(line.split())
+    
+    for line in args.pattern:
+        match = re.match(pattern, line)
+        print(match, fh)
+ 
+  
 
 # --------------------------------------------------
 if __name__ == '__main__':
