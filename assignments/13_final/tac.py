@@ -37,10 +37,7 @@ def get_args() -> Args:
                         help='FILE',
                         metavar='FILE',
                         type=argparse.FileType('wt'),
-                        default=sys.stdout)                   
-    
-
-    args = parser.parse_args()
+                        default=sys.stdout)
 
     return parser.parse_args()
 
@@ -53,8 +50,8 @@ def main() -> None:
 
     for fh in args.files:
         for line in reversed(list(fh)):
-                print(line.rstrip())
-    
+            print(line.rstrip(), file=args.outfile)
+
 
 # --------------------------------------------------
 if __name__ == '__main__':
