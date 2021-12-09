@@ -16,7 +16,7 @@ def get_args():
         description='Find Conserved bases',
         formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 
-    parser.add_argument('file',
+    parser.add_argument('FILE',
                         help='find conserved bases',
                         metavar='FILE',
                         type=argparse.FileType('rt'))
@@ -29,25 +29,21 @@ def main():
     """Make a jazz noise here"""
 
     args = get_args()
-    print(args)
+    FILE = args.FILE.read().strip()
+    seqs = FILE.splitlines()
 
-    seqs = args.file.read().splitlines()
-
-    print('\n'.join(seqs))
+    print(FILE)
 
     for i in range(len(seqs[0])):
-        bases = []
-        for seq in seqs:
-            bases += seq[i]
-
-        print(bases)
-        if all([bases[0] == base for base in bases]):
+        bases = [base[i] for base in seqs]
+        if bases.count(bases[0]) == len(bases):
             print('|', end='')
         else:
             print('x', end='')
-
+    
     print()
 
+  
 
 # --------------------------------------------------
 if __name__ == '__main__':
