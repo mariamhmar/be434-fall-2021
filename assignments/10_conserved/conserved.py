@@ -39,11 +39,10 @@ def main():
         if bases.count(bases[0]) == len(bases):
             print('|', end='')
         else:
-            print('x', end='')
-    
+            print('X', end='')
+
     print()
 
-  
 
 # --------------------------------------------------
 if __name__ == '__main__':
