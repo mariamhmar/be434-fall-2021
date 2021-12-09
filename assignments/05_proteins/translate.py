@@ -7,7 +7,7 @@ Purpose: Rock the Casbah
 
 import argparse
 from typing import NamedTuple, TextIO
- 
+
 
 class Args(NamedTuple):
     """ Command-line arguments """
@@ -26,12 +26,10 @@ def get_args() -> Args:
         description='Rock the Casbah',
         formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 
-    parser.add_argument('sequence',
-                        metavar='str',
-                        help='DNA/RNA sequence')
+    parser.add_argument('sequence', metavar='str', help='DNA/RNA sequence')
 
     parser.add_argument('-o',
-                        '--output',
+                        '--outfile',
                         help='output file',
                         metavar='FILE',
                         type=argparse.FileType('wt'),
@@ -44,7 +42,6 @@ def get_args() -> Args:
                         type=argparse.FileType('rt'),
                         required=True)
 
-
     return parser.parse_args()
 
 
@@ -53,24 +50,25 @@ def main() -> None:
     """ Make a jazz noise here """
 
     args = get_args()
-    print(args)
+    # print(args)
 
     codon_table = {}
     for line in args.codons:
         key, val = line.split()
         codon_table[key] = val
 
-    k= 3
+    k = 3
     seq = args.sequence.upper()
     protein = ''
     for codon in [seq[i:i + k] for i in range(0, len(seq), k)]:
         protein += codon_table.get(codon, '-')
-        #print(codon, codon_table.get(codon, '-'), end='')
+        # print(codon, codon_table.get(codon, '-'), end='')
 
     print(protein, file=args.outfile)
     print(f'Output written to "{args.outfile.name}".')
 
-    #pprint(codon_table)
+    # pprint(codon_table)
+
 
 # --------------------------------------------------
 if __name__ == '__main__':
